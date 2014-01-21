@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>WebWidgets Demo Page</title>
+    <!--Подключение стилей зависимостей-->
+    <link rel="stylesheet" href="../extralibs/css/kendo.common.min.css"/>
+    <link rel="stylesheet" href="../extralibs/css/kendo.blueopal.min.css"/>
+
+    <!--Подключение стилей нашей библиотеки виджетов-->
     <link rel="stylesheet" href="../build/css/webWidgets.min.css"/>
+
+    <!--Подключение демо css-->
+    <link rel="stylesheet" href="demo.css"/>
 </head>
 <body>
 
-
+<!--wGrid-->
 <div class="grid-example">
-    <div class="grid-example-title">Пример использования wGrid</div>
+    <h1 class="grid-example-title">Пример использования wGrid</h1>
     <div class="grid-example-container js-grid-example-container"></div>
 </div>
 
-
 <!--Подключение зависимостей-->
 <script src="../extralibs/js/jquery.min.js"></script>
-<script src="../extralibs/js/kendo/kendo.grid.min.js"></script>
+<script src="../extralibs/js/kendo/kendo.all.min.js"></script>
 
 <!--Подключение нашей библиотеки виджетов-->
 <script src="../build/js/webWidgets.min.js"></script>
 
-<!--Подключение демо файла-->
+<!--Подключение демо js-->
 <script src="demo.js"></script>
 </body>
 </html>

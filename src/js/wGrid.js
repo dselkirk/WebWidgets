@@ -10,13 +10,16 @@
     // Create the defaults once
     var pluginName = "wGrid",
         defaults = {
-            renderer: "kendoui" // widget renderer library
+            renderer: "kendoui", // widget renderer library
+            columns: [],
+            dataSource: []
         };
 
     wGrid.prototype = {
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
+                    $(this.element).kendoGrid(this.settings);
                     break;
                 default:
                     console.error('Не верно указан renderer');
