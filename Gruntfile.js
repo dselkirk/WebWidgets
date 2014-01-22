@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
@@ -28,12 +28,25 @@ module.exports = function(grunt) {
                 src: 'build/js/webWidgets.js',
                 dest: 'build/js/webWidgets.min.js'
             }
+        },
+        jsdoc: {
+            docstrap: {
+                src: ['src/js/*.js'],
+                options: {
+                    destination: 'doc',
+                    template: "doc/ink-docstrap/template",
+                    configure: "doc/ink-docstrap/template/jsdoc.conf.json"
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
+
+    grunt.registerTask('doc', ['jsdoc:docstrap']);
     grunt.registerTask('build', ['cssmin:combine', 'cssmin:minify', 'concat', 'uglify']);
 };

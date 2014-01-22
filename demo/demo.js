@@ -1,22 +1,18 @@
 // Пример использования wGrid
 $('.js-grid-example-container').wGrid({
-
-    // Выбираем библиотеку, которая будет заниматься рендерингом виджета.
     renderer: 'kendoui',
-
-    // Выбираем количество колонок с параметрами
     columns: [
         {
             field: "id",
-            title: "ID"
+            title: "ID",
+            sortable: true
         },
         {
             field: "firstName",
-            title: "First Name"
+            title: "First Name",
+            sortable: true
         }
     ],
-
-    // Данные для заполнения grid.
     dataSource: [
         {
             id: '1', firstName: 'Mike'
@@ -24,5 +20,6 @@ $('.js-grid-example-container').wGrid({
         {
             id: '2', firstName: 'Helena'
         }
-    ]
+    ],
+    sortable: true
 });

@@ -1,18 +1,30 @@
 /**
- *  wGrid widget
- * */
+ * wGrid Widget
+ */
 
-// the semi-colon before function invocation is a safety net against concatenated
-// scripts and/or other plugins which may not be closed properly.
 ;
+/**
+ * @namespace wGrid
+ */
 (function ($, window, document, undefined) {
 
-    // Create the defaults once
+    /**
+     * @namespace wGrid
+     * @property {object}  defaults                       - Настройки для wGrid.
+     * @property {string}  defaults.renderer              - Движок рендеринга. Возможные значения: <br/>"kendoui" - за рендеринг отвечает библиотека Kendo UI, необходимо подключить саму библиотеку и стили
+     * @property {Object[]}  defaults.columns             - Массив объектов колонок. <br/> Объект колонки включает в себя следующие поля:
+     * @property {string} defaults.columns.field          - ID колонки wGrid.
+     * @property {string} defaults.columns.title          - Заголовок колонки wGrid.
+     * @property {boolean} defaults.columns.sortable      - Разрешена ли сортировка конкретной колонки. Работает, только если разрешена сортировка всех колонок
+     * @property {Object[]}  defaults.dataSource          - Массив объектов данных. <br/> Объект данных включают в себя следующие поля:
+     * @property {boolean}  defaults.sortable             - Разрешена ли сортировка всех колонок.
+     */
     var pluginName = "wGrid",
         defaults = {
-            renderer: "kendoui", // widget renderer library
+            renderer: "kendoui",
             columns: [],
-            dataSource: []
+            dataSource: [],
+            sortable: true
         };
 
     wGrid.prototype = {
@@ -37,13 +49,8 @@
         });
     };
 
-    // The actual plugin constructor
     function wGrid(element, options) {
         this.element = element;
-        // jQuery has an extend method which merges the contents of two or
-        // more objects, storing the result in the first object. The first object
-        // is generally empty as we don't want to alter the default options for
-        // future instances of the plugin
         this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
