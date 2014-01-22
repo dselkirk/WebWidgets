@@ -24,5 +24,5 @@ $('.js-grid-example-container').wGrid({
     sortable: true,
     resizable: true,
     groupable : true,
-    groupableMessage: 'Переместите сюда колонки'
+    groupableMessage: 'Переместите сюда колонки для группировки'
 });

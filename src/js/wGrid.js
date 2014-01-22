@@ -7,33 +7,34 @@
 
     /**
      * Пример инициализации плагина
-     * <pre><code>
+     *  <pre><code>
+     * &lt;div class=&quot;js-grid-example-container&quot;&gt;&lt;/div&gt;
      $('.js-grid-example-container').wGrid({
-    renderer: 'kendoui',
-    columns: [
-        {
-            field: "id",
-            title: "ID",
-            sortable: true
-        },
-        {
-            field: "firstName",
-            title: "First Name",
-            sortable: true
-        }
-    ],
-    groupable: true,
-    groupableMessage: "Переместите сюда колонки для группировки)"
-    dataSource: [
-        {
-            id: '1', firstName: 'Mike'
-        },
-        {
-            id: '2', firstName: 'Helena'
-        }
-    ],
-    sortable: true
-});
+         renderer: 'kendoui',
+         columns: [
+            {
+                field: "id",
+                title: "ID",
+                sortable: true
+            },
+            {
+                field: "firstName",
+                title: "First Name",
+                sortable: false
+            }
+         ],
+        groupable: true,
+        groupableMessage: "Переместите сюда колонки для группировки"
+        dataSource: [
+            {
+                id: '1', firstName: 'Mike'
+            },
+            {
+                id: '2', firstName: 'Helena'
+            }
+        ],
+        sortable: true
+    });
      </code></pre>
      *
      * @namespace wGrid
@@ -46,7 +47,7 @@
      * @property {Object[]}  defaults.dataSource          - Массив объектов данных. <br/> Объект данных включают в себя пары "ключ-значение", где ключами являются идентификаторы колонок.
      * @property {boolean}  defaults.sortable             - Разрешена ли сортировка всех колонок.
      * @property {boolean}  defaults.groupable            - Разрешена ли группировка по колонкам.
-     * @property {boolean}  defaults.groupableMessage     - Сообщение, выводимое в пустой панели группировки колонок.
+     * @property {string}  defaults.groupableMessage      - Сообщение, выводимое в пустой панели группировки колонок.
      * @property {boolean}  defaults.resizable            - Разрешено ли изменение размера колонок.
 
      */
