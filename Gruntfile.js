@@ -29,6 +29,7 @@ module.exports = function (grunt) {
                 dest: 'build/js/webWidgets.min.js'
             }
         },
+        clean: ["build/"],
         jsdoc: {
             docstrap: {
                 src: ['src/js/*.js'],
@@ -44,9 +45,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-jsdoc');
 
-
+    grunt.registerTask('clear', ['clean']);
     grunt.registerTask('doc', ['jsdoc:docstrap']);
-    grunt.registerTask('build', ['cssmin:combine', 'cssmin:minify', 'concat', 'uglify', 'jsdoc:docstrap']);
+    grunt.registerTask('build', ['clean','cssmin:combine', 'cssmin:minify', 'concat', 'uglify', 'jsdoc:docstrap']);
 };
