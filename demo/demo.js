@@ -10,7 +10,7 @@ $('.js-grid-example-container').wGrid({
         {
             field: "firstName",
             title: "First Name",
-            sortable: true
+            sortable: false
         }
     ],
     dataSource: [
@@ -21,5 +21,8 @@ $('.js-grid-example-container').wGrid({
             id: '2', firstName: 'Helena'
         }
     ],
-    sortable: true
+    sortable: true,
+    resizable: true,
+    groupable : true,
+    groupableMessage: 'Переместите сюда колонки'
 });

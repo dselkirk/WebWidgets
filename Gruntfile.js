@@ -48,5 +48,5 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask('doc', ['jsdoc:docstrap']);
-    grunt.registerTask('build', ['cssmin:combine', 'cssmin:minify', 'concat', 'uglify']);
+    grunt.registerTask('build', ['cssmin:combine', 'cssmin:minify', 'concat', 'uglify', 'jsdoc:docstrap']);
 };

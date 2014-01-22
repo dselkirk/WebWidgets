@@ -3,34 +3,75 @@
  */
 
 ;
-/**
- * @namespace wGrid
- */
 (function ($, window, document, undefined) {
 
     /**
+     * Пример инициализации плагина
+     * <pre><code>
+     $('.js-grid-example-container').wGrid({
+    renderer: 'kendoui',
+    columns: [
+        {
+            field: "id",
+            title: "ID",
+            sortable: true
+        },
+        {
+            field: "firstName",
+            title: "First Name",
+            sortable: true
+        }
+    ],
+    groupable: true,
+    groupableMessage: "Переместите сюда колонки для группировки)"
+    dataSource: [
+        {
+            id: '1', firstName: 'Mike'
+        },
+        {
+            id: '2', firstName: 'Helena'
+        }
+    ],
+    sortable: true
+});
+     </code></pre>
+     *
      * @namespace wGrid
      * @property {object}  defaults                       - Настройки для wGrid.
      * @property {string}  defaults.renderer              - Движок рендеринга. Возможные значения: <br/>"kendoui" - за рендеринг отвечает библиотека Kendo UI, необходимо подключить саму библиотеку и стили
      * @property {Object[]}  defaults.columns             - Массив объектов колонок. <br/> Объект колонки включает в себя следующие поля:
-     * @property {string} defaults.columns.field          - ID колонки wGrid.
+     * @property {string} defaults.columns.field          - Идентификатор колонки wGrid.
      * @property {string} defaults.columns.title          - Заголовок колонки wGrid.
      * @property {boolean} defaults.columns.sortable      - Разрешена ли сортировка конкретной колонки. Работает, только если разрешена сортировка всех колонок
-     * @property {Object[]}  defaults.dataSource          - Массив объектов данных. <br/> Объект данных включают в себя следующие поля:
+     * @property {Object[]}  defaults.dataSource          - Массив объектов данных. <br/> Объект данных включают в себя пары "ключ-значение", где ключами являются идентификаторы колонок.
      * @property {boolean}  defaults.sortable             - Разрешена ли сортировка всех колонок.
+     * @property {boolean}  defaults.groupable            - Разрешена ли группировка по колонкам.
+     * @property {boolean}  defaults.groupableMessage     - Сообщение, выводимое в пустой панели группировки колонок.
+     * @property {boolean}  defaults.resizable            - Разрешено ли изменение размера колонок.
+
      */
     var pluginName = "wGrid",
         defaults = {
             renderer: "kendoui",
             columns: [],
             dataSource: [],
-            sortable: true
+            sortable: true,
+            groupable: true,
+            groupableMessage: "Переместите сюда колонки для группировки",
+            resizable: true
         };
 
     wGrid.prototype = {
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
+
+                    if (this.settings.groupable) {
+                        this.settings.groupable = {};
+                        this.settings.groupable.messages = {};
+                        this.settings.groupable.messages.empty = this.settings.groupableMessage;
+                    }
+
                     $(this.element).kendoGrid(this.settings);
                     break;
                 default:
