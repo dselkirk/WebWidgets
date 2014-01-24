@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 dest: 'build/js/webWidgets.min.js'
             }
         },
-        clean: ["build/"],
+        clean: ["build/, doc/"],
         jsdoc: {
             docstrap: {
                 src: ['src/js/*.js'],

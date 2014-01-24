@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Index</title>
+	<title>DocStrap Source: wForm.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -47,36 +47,76 @@
 	<div class="row-fluid">
 
 		
-		<div class="span8">
-			
+			<div class="span12">
+				
 				<div id="main">
 					
 
 
-	
-	<span class="page-title">Index</span>
-	
-	
+		<h1 class="page-title">Source: wForm.js</h1>
+    
+    <section>
+        <article>
+            <pre class="sunlight-highlight-javascript linenums">/**
+ * wForm Widget
+ */
+
+;
+(function ($, window, document, undefined) {
+
+    /**
+     * @namespace wForm
+     * @property {object}  defaults                  - Настройки для wForm.
+     * @property {string}  defaults.renderer         - Движок рендеринга. Возможные значения: &lt;br/>"kendoui" - за рендеринг отвечает библиотека Kendo UI, необходимо подключить саму библиотеку и стили.
+     * @property {string}  defaults.name             - Имя wForm.
+     * @property {string}  defaults.url              - Url, куда отправлять данные, при submit'e wForm.
+     */
+    var pluginName = "wForm",
+        defaults = {
+            renderer: "kendoui",
+            name: 'wForm',
+            url: '#'
+        };
+
+    wForm.prototype = {
+        init: function () {
+            switch (this.settings.renderer) {
+                case 'kendoui':
+                    break;
+                default:
+                    console.error('Не верно указан renderer');
+                    break;
+            }
+        },
+        validate: function(){},
+        validateField: function(){},
+        clear: function(){},
+        save: function(){},
+        generateHTML: function(){}
+    };
+
+    // Some king of singleton
+    $.fn[ pluginName ] = function (options) {
+        return this.each(function () {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName, new wForm(this, options));
+            }
+        });
+    };
+
+    function wForm(element, options) {
+        this.element = element;
+        this.settings = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+})(jQuery, window, document);
 
 
-
-
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
-
+</pre>
+        </article>
+    </section>
 
 
 
@@ -100,10 +140,6 @@
 				</footer>
 			</div>
 
-			
-			<div class="span3">
-				<div id="toc"></div>
-			</div>
 			
 			<br clear="both">
 		</div>

@@ -26,3 +26,23 @@ $('.js-grid-example-container').wGrid({
     groupable : true,
     groupableMessage: 'Переместите сюда колонки для группировки'
 });
+
+
+// Пример использования wForm
+$('.js-form-example-container').wForm({
+    name  : 'form',
+    url   : 'server/post',
+    fields: [
+        { name: 'first_name', type: 'text', required: true },
+        { name: 'last_name',  type: 'text', required: true },
+        { name: 'comments',   type: 'text'}
+    ],
+    actions: {
+        reset: function () {
+            this.clear();
+        },
+        save: function () {
+            this.save();
+        }
+    }
+});
