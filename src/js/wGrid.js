@@ -40,7 +40,7 @@
      * @namespace wGrid
      * @property {object}  defaults                       - Настройки для wGrid.
      * @property {string}  defaults.renderer              - Движок рендеринга. Возможные значения: <br/>"kendoui" - за рендеринг отвечает библиотека Kendo UI, необходимо подключить саму библиотеку и стили
-     * @property {Object[]}  defaults.columns             - Массив объектов колонок. <br/> Объект колонки включает в себя следующие поля:
+     * @property {Object[]}  defaults.columns             - Массив объектов колонок. <br/> Объект колонки включает в себя следующие аттрибуты:
      * @property {string} defaults.columns.field          - Идентификатор колонки wGrid.
      * @property {string} defaults.columns.title          - Заголовок колонки wGrid.
      * @property {boolean} defaults.columns.sortable      - Разрешена ли сортировка конкретной колонки. Работает, только если разрешена сортировка всех колонок

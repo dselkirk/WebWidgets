@@ -23,19 +23,19 @@ $('.js-grid-example-container').wGrid({
     ],
     sortable: true,
     resizable: true,
-    groupable : true,
+    groupable: true,
     groupableMessage: 'Переместите сюда колонки для группировки'
 });
 
 
 // Пример использования wForm
 $('.js-form-example-container').wForm({
-    name  : 'form',
-    url   : 'server/post',
+    name: 'form',
+    url: '#',
     fields: [
         { name: 'first_name', type: 'text', required: true },
-        { name: 'last_name',  type: 'text', required: true },
-        { name: 'comments',   type: 'text'}
+        { name: 'last_name', type: 'text', required: true },
+        { name: 'comments', type: 'text'}
     ],
     actions: {
         reset: function () {
