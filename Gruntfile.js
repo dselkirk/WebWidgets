@@ -23,6 +23,15 @@ module.exports = function (grunt) {
                 dest: 'build/js/webWidgets.js'
             }
         },
+        encase: {
+            develop: {
+                separator: '\n',
+                enviroment: 'browser',
+                params: {"jQuery": "$","window": "window", "documant": "window", },
+                src: 'src/js/*.js',
+                dest: 'build/js/webWidgets.js'
+            }
+        },
         uglify: {
             build: {
                 src: 'build/js/webWidgets.js',
@@ -44,8 +53,9 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-encase');
     grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('clear', ['clean']);

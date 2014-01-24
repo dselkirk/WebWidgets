@@ -34,7 +34,6 @@ $('.js-form-example-container').wForm({
     url: '#',
     fields: [
         { name: 'first_name', type: 'text', required: true },
-        { name: 'last_name', type: 'text', required: true },
         { name: 'comments', type: 'text'}
     ],
     actions: {

@@ -11,12 +11,10 @@
      * @property {string}  defaults.renderer         - Движок рендеринга. Возможные значения: <br/>"kendoui" - за рендеринг отвечает библиотека Kendo UI, необходимо подключить саму библиотеку и стили.
      * @property {string}  defaults.name             - Имя wForm.
      * @property {string}  defaults.url              - Url, куда отправлять данные, при submit'e wForm.
-     * @property {Object[]}  defaults.fields         - Массив объектов полей. <br/> Объект поля включает в себя следующие аттрибуты:
+     * @property {object[]}  defaults.fields         - Массив объектов полей. <br/> Объект поля включает в себя следующие аттрибуты:
      * @property {string}  defaults.fields.name      - Имя поля. Передается на сервер
      * @property {string}  defaults.fields.type      - Тип поля. Возможны следующие значения:<br/>
-     *                                                  text - текстовое поле,<br/>
-     *                                                  textarea - текстовая область,<br/>
-     *                                                  date - дата<br/>
+     *                                                  text - текстовое поле<br/>
      *
      * @property {boolean}  defaults.readonly        - wForm только в режиме просмотра.
      * @property {Object[]}  defaults.actions        - Действия с wForm
@@ -29,6 +27,13 @@
             fields:[],
             actions: {},
             readonly: false
+        },
+        formType = {
+            aligned: {
+
+            },
+            stacked: {}
+
         };
 
     wForm.prototype = {
@@ -45,7 +50,7 @@
         save: function(){},
         render: function(){},
         destroy: function(){},
-        edit: function(formData){},
+        populate: function(formData){},
         validate: function(){},
         validateField: function(){},
         generateHTML: function(){},
@@ -54,7 +59,7 @@
         readonlyField: function(fieldId){}
     };
 
-    // Some king of singleton
+    // Some kind of singleton
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
             if (!$.data(this, "plugin_" + pluginName)) {
