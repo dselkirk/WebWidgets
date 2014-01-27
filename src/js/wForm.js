@@ -63,11 +63,30 @@
         validateField: function () {
         },
         generateHTML: function () {
-            $("<form></form>")
-                .addClass("wForm-" + this.settings.type)
-                .appendTo(this.element);
+            var field,
+                label,
+                fieldSource,
+                form = $("<form></form>")
+                    .addClass("wForm-" + this.settings.type)
+                    .attr('name', this.settings.name);
+
+            for (var f = 0; f < this.settings.fields.length; f++) {
+                fieldSource = this.settings.fields[f];
+                field = this.generateField(fieldSource);
+                label = $("<label></label>").attr('for', fieldSource.name).text(fieldSource.caption);
+
+                $(label).appendTo(form);
+                $(field).appendTo(form);
+            }
+
+            form.appendTo(this.element);
         },
         generateField: function (fieldSource) {
+            if (fieldSource.type || fieldSource.name) {
+                return wWidgets.field.prototype.generate.call(this, fieldSource.type, fieldSource.name);
+            } else {
+                console.error(pluginName + ': Не хватает данных для генерации поля');
+            }
         },
         readonly: function () {
         },
@@ -91,6 +110,8 @@
         this._name = pluginName;
         this.init();
     }
+
+    wWidgets.form = wForm;
 })(jQuery, window, document);
 
 

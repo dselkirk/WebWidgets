@@ -98,6 +98,8 @@
         this._name = pluginName;
         this.init();
     }
+
+    wWidgets.grid = wGrid;
 })(jQuery, window, document);
 
 

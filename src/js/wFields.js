@@ -1,6 +1,5 @@
 ;
 (function ($, window, document, undefined) {
-
     var pluginName = "wField",
         defaults = {
             renderer: ""
@@ -14,8 +13,10 @@
                         case 'text':
                             var defaults = {
                                 name: '',
-                                required: false
+                                required: false,
+                                caption: ''
                             }
+
                             this.options = $.extend({}, defaults, settings);
                             break;
                     }
@@ -57,5 +58,7 @@
         this._name = pluginName;
         this.init(element, options);
     }
+
+    wWidgets.field = wField;
 })(jQuery, window, document);
 

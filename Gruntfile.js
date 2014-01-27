@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         },
         concat: {
             dist: {
-                src: ['src/js/*.js'],
+                src: ['src/js/wUtils.js', 'src/js/wFields.js', 'src/js/wForm.js', 'src/js/wGrid.js'],
                 dest: 'build/js/webWidgets.js'
             }
         },
@@ -27,7 +27,7 @@ module.exports = function (grunt) {
             develop: {
                 separator: '\n',
                 enviroment: 'browser',
-                params: {"jQuery": "$","window": "window", "documant": "window", },
+                params: {"jQuery": "$", "window": "window", "document": "document" },
                 src: 'src/js/*.js',
                 dest: 'build/js/webWidgets.js'
             }
@@ -60,5 +60,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask('clear', ['clean']);
     grunt.registerTask('doc', ['jsdoc:docstrap']);
-    grunt.registerTask('build', ['clean','cssmin:combine', 'cssmin:minify', 'concat', 'uglify', 'jsdoc:docstrap']);
+    grunt.registerTask('build', ['clean', 'cssmin:combine', 'cssmin:minify', 'concat', 'uglify', 'jsdoc:docstrap']);
 };

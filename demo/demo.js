@@ -30,10 +30,10 @@ $('.js-grid-example-container').wGrid({
 
 // Пример использования wForm
 $('.js-form-example-container').wForm({
-    name: 'form',
+    name: 'testForm',
     url: '#',
     fields: [
-        { name: 'first_name', type: 'text', required: true }
+        { name: 'firstName', type: 'text', caption: "Имя:" }
     ],
     actions: {
         reset: function () {
