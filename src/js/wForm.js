@@ -28,20 +28,13 @@
             actions: {},
             readonly: false,
             type: 'aligned'
-        },
-        formType = {
-            aligned: {
-
-            },
-            stacked: {}
-
         };
 
     wForm.prototype = {
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
-                    this.generateHTML();
+                    this.render();
                     break;
                 default:
                     console.error(pluginName + ': Не верно указан renderer');
@@ -53,8 +46,10 @@
         save: function () {
         },
         render: function () {
-        },
-        destroy: function () {
+            this.generateHTML();
+            for (var f = 0; f < this.settings.fields.length; f++) {
+                wWidgets.field.prototype.populate.call(this, this.settings.fields[f]);
+            }
         },
         populate: function (formData) {
         },
@@ -66,20 +61,39 @@
             var field,
                 label,
                 fieldSource,
+                fieldContainer,
                 form = $("<form></form>")
-                    .addClass("wForm-" + this.settings.type)
+                    .addClass("wForm--" + this.settings.type)
+                    .attr('action', this.settings.url)
                     .attr('name', this.settings.name);
 
             for (var f = 0; f < this.settings.fields.length; f++) {
+                // Объект поля
                 fieldSource = this.settings.fields[f];
-                field = this.generateField(fieldSource);
-                label = $("<label></label>").attr('for', fieldSource.name).text(fieldSource.caption);
 
-                $(label).appendTo(form);
-                $(field).appendTo(form);
+                // HTML-поле
+                field = this.generateField(fieldSource);
+
+                // Контейнер для label и поля
+                fieldContainer = $("<div></div>").addClass('wForm-field');
+
+                // Label
+                label = $("<label></label>")
+                    .attr('for', fieldSource.name)
+                    .text(fieldSource.caption)
+                    .addClass('wForm-label');
+
+                // Добавляем к DOM
+                label.appendTo(fieldContainer);
+                $(field).appendTo(fieldContainer);
+                fieldContainer.appendTo(form);
             }
 
-            form.appendTo(this.element);
+            form.appendTo($(this.element));
+
+        },
+        generateAction: function () {
+
         },
         generateField: function (fieldSource) {
             if (fieldSource.type || fieldSource.name) {

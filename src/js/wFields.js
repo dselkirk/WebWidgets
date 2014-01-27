@@ -2,29 +2,36 @@
 (function ($, window, document, undefined) {
     var pluginName = "wField",
         defaults = {
-            renderer: ""
+            renderer: "kendoui"
         };
 
     wField.prototype = {
-        init: function (selector, settings) {
+        populate: function (settings) {
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
                         case 'text':
+                            break;
+                        case 'number':
                             var defaults = {
-                                name: '',
-                                required: false,
-                                caption: ''
-                            }
-
-                            this.options = $.extend({}, defaults, settings);
+                                decimals: null,
+                                format: 'n',
+                                min: null,
+                                max: null,
+                                step: 1,
+                                value: null
+                            };
+                            defaults = $.extend(true, defaults, settings);
+                            $('#' + settings.name).kendoNumericTextBox(defaults);
                             break;
                     }
                     break;
                 default:
-                    console.error(pluginName + ': Не верно указан renderer');
+                    console.error(pluginName + ': Неверно указан renderer');
                     break;
             }
+        },
+        clear: function () {
         },
         generate: function (type, id) {
             var template = null;
@@ -33,8 +40,11 @@
                 case 'text':
                     template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
+                case 'number':
+                    template = '<input data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
+                    break;
                 default:
-                    console.error(pluginName + ': Не верно указан тип поля');
+                    console.error(pluginName + ': Неверно указан тип поля');
                     break;
             }
 
@@ -56,7 +66,6 @@
         this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
-        this.init(element, options);
     }
 
     wWidgets.field = wField;

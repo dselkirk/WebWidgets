@@ -33,7 +33,8 @@ $('.js-form-example-container').wForm({
     name: 'testForm',
     url: '#',
     fields: [
-        { name: 'firstName', type: 'text', caption: "Имя:" }
+        { name: 'firstName', type: 'text', caption: "Имя:" },
+        { name: 'age', type: 'number', caption: "Циферка возраста:", value: 200, min: 100, max: 300 }
     ],
     actions: {
         reset: function () {
