@@ -76,7 +76,7 @@
                     $(this.element).kendoGrid(this.settings);
                     break;
                 default:
-                    console.error('Не верно указан renderer');
+                    console.error(pluginName + ': Не верно указан renderer');
                     break;
             }
         }

@@ -33,8 +33,7 @@ $('.js-form-example-container').wForm({
     name: 'form',
     url: '#',
     fields: [
-        { name: 'first_name', type: 'text', required: true },
-        { name: 'comments', type: 'text'}
+        { name: 'first_name', type: 'text', required: true }
     ],
     actions: {
         reset: function () {
