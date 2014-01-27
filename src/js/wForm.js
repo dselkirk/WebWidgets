@@ -24,9 +24,10 @@
             renderer: "kendoui",
             name: 'wForm',
             url: '#',
-            fields:[],
+            fields: [],
             actions: {},
-            readonly: false
+            readonly: false,
+            type: 'aligned'
         },
         formType = {
             aligned: {
@@ -40,23 +41,38 @@
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
+                    this.generateHTML();
                     break;
                 default:
                     console.error(pluginName + ': Не верно указан renderer');
                     break;
             }
         },
-        clear: function(){},
-        save: function(){},
-        render: function(){},
-        destroy: function(){},
-        populate: function(formData){},
-        validate: function(){},
-        validateField: function(){},
-        generateHTML: function(){},
-        generateField: function(fieldSource){},
-        readonly: function(){},
-        readonlyField: function(fieldId){}
+        clear: function () {
+        },
+        save: function () {
+        },
+        render: function () {
+        },
+        destroy: function () {
+        },
+        populate: function (formData) {
+        },
+        validate: function () {
+        },
+        validateField: function () {
+        },
+        generateHTML: function () {
+            $("<form></form>")
+                .addClass("wForm-" + this.settings.type)
+                .appendTo(this.element);
+        },
+        generateField: function (fieldSource) {
+        },
+        readonly: function () {
+        },
+        readonlyField: function (fieldId) {
+        }
     };
 
     // Some kind of singleton

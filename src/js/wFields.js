@@ -1,13 +1,13 @@
 ;
 (function ($, window, document, undefined) {
 
-    var pluginName = "wFields",
+    var pluginName = "wField",
         defaults = {
             renderer: ""
         };
 
-    wFields.prototype = {
-        initField: function (selector, settings) {
+    wField.prototype = {
+        init: function (selector, settings) {
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
@@ -16,6 +16,7 @@
                                 name: '',
                                 required: false
                             }
+                            this.options = $.extend({}, defaults, settings);
                             break;
                     }
                     break;
@@ -23,6 +24,20 @@
                     console.error(pluginName + ': Не верно указан renderer');
                     break;
             }
+        },
+        generate: function (type, id) {
+            var template = null;
+
+            switch (type) {
+                case 'text':
+                    template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
+                    break;
+                default:
+                    console.error(pluginName + ': Не верно указан тип поля');
+                    break;
+            }
+
+            return template;
         }
     };
 
@@ -30,16 +45,17 @@
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
             if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, new wFields(this, options));
+                $.data(this, "plugin_" + pluginName, new wField(this, options));
             }
         });
     };
 
-    function wFields(element, options) {
+    function wField(element, options) {
         this.element = element;
+        this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
-        this.initField(element, options);
+        this.init(element, options);
     }
 })(jQuery, window, document);
 
