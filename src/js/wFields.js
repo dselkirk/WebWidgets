@@ -6,7 +6,7 @@
         };
 
     wField.prototype = {
-        populate: function (settings) {
+        populate: function (form, settings) {
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
@@ -22,7 +22,49 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            $('#' + settings.name).kendoNumericTextBox(defaults);
+                            $('#' + form)
+                                .find('#' + settings.name)
+                                .kendoNumericTextBox(defaults);
+                            break;
+                        case 'date':
+                            var defaults = {
+                                format: 'dd/MM/yyyy',
+                                min: new Date(1900, 0, 1),
+                                max: new Date(2099, 11, 31),
+                                start: 'month',
+                                value: null
+                            };
+                            defaults = $.extend(true, defaults, settings);
+                            $('#' + form)
+                                .find('#' + settings.name)
+                                .kendoDatePicker(defaults);
+                            break;
+                        case 'time':
+                            var defaults = {
+                                format: 'HH:mm',
+                                interval: '30',
+                                min: new Date(1900, 0, 1, 8, 0, 0),
+                                max: new Date(2099, 0, 1, 22, 0, 0),
+                                value: null
+                            };
+                            defaults = $.extend(true, defaults, settings);
+                            $('#' + form)
+                                .find('#' + settings.name)
+                                .kendoTimePicker(defaults);
+                            break;
+                        case 'datetime':
+                            var defaults = {
+                                format: 'dd/MM/yyyy HH:mm',
+                                timeFormat: 'HH:mm',
+                                interval: '30',
+                                min: new Date(1900, 0, 1, 8, 0, 0),
+                                max: new Date(2099, 0, 1, 22, 0, 0),
+                                value: null
+                            };
+                            defaults = $.extend(true, defaults, settings);
+                            $('#' + form)
+                                .find('#' + settings.name)
+                                .kendoDateTimePicker(defaults);
                             break;
                     }
                     break;
@@ -41,6 +83,9 @@
                     template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
                 case 'number':
+                case 'date':
+                case 'time':
+                case 'datetime':
                     template = '<input data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
                 default:
@@ -55,8 +100,8 @@
     // Some kind of singleton
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, new wField(this, options));
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, new wField(this, options));
             }
         });
     };
