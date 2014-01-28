@@ -66,6 +66,21 @@
                                 .find('#' + settings.name)
                                 .kendoDateTimePicker(defaults);
                             break;
+                        case 'picker':
+                            var defaults = {
+                                    buttons: true,
+                                    messages: {
+                                        apply: "Обновить",
+                                        cancel: "Отменить"
+                                    },
+                                    value: null
+                                }
+                                ;
+                            defaults = $.extend(true, defaults, settings);
+                            $('#' + form)
+                                .find('#' + settings.name)
+                                .kendoColorPicker(defaults);
+                            break;
                     }
                     break;
                 default:
@@ -86,6 +101,7 @@
                 case 'date':
                 case 'time':
                 case 'datetime':
+                case 'picker':
                     template = '<input data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
                 default:
@@ -97,7 +113,7 @@
         }
     };
 
-    // Some kind of singleton
+// Some kind of singleton
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
             if (!$.data(this, 'plugin_' + pluginName)) {
@@ -114,5 +130,6 @@
     }
 
     wWidgets.field = wField;
-})(jQuery, window, document);
+})
+    (jQuery, window, document);
 

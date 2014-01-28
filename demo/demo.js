@@ -37,7 +37,9 @@ $('.js-form-example-container').wForm({
         { name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 200, min: 100, max: 300 },
         { name: 'someDate', type: 'date', caption: "Какая-то дата:"},
         { name: 'someTime', type: 'time', caption: "Какое-то время:"},
-        { name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"}
+        { name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"},
+        { name: 'someColorPicker', type: 'picker', caption: "Какой-то цвет:"}
+
     ],
     actions: {
         reset: function () {
