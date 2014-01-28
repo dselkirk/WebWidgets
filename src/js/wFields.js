@@ -88,7 +88,45 @@
                     break;
             }
         },
-        clear: function () {
+        update: function (form, settings, value) {
+            var defValue = value != undefined ? value : null;
+
+            switch (settings.type) {
+                case 'text':
+                    $('#' + form)
+                        .find('#' + settings.name).val(defValue);
+                    break;
+                case 'number':
+                    $('#' + form)
+                        .find('#' + settings.name)
+                        .data('kendoNumericTextBox')
+                        .value(defValue);
+                    break;
+                case 'date':
+                    $('#' + form)
+                        .find('#' + settings.name)
+                        .data('kendoDatePicker')
+                        .value(defValue);
+                    break;
+                case 'time':
+                    $('#' + form)
+                        .find('#' + settings.name)
+                        .data('kendoTimePicker')
+                        .value(defValue);
+                    break;
+                case 'datetime':
+                    $('#' + form)
+                        .find('#' + settings.name)
+                        .data('kendoDateTimePicker')
+                        .value(defValue);
+                    break;
+                case 'picker':
+                    $('#' + form)
+                        .find('#' + settings.name)
+                        .data('kendoColorPicker')
+                        .value(defValue);
+                    break;
+            }
         },
         generate: function (type, id) {
             var template = null;

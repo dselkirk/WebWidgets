@@ -17,7 +17,7 @@
      *                                                  text - текстовое поле<br/>
      *
      * @property {boolean}  defaults.readonly        - wForm только в режиме просмотра.
-     * @property {Object[]}  defaults.actions        - Действия с wForm
+     * @property {object[]}  defaults.actions        - Действия с wForm
      */
     var pluginName = 'wForm',
         defaults = {
@@ -25,7 +25,7 @@
             name: 'wForm',
             url: '#',
             fields: [],
-            actions: {},
+            actions: [],
             readonly: false,
             type: 'aligned'
         };
@@ -42,6 +42,9 @@
             }
         },
         clear: function () {
+            for (var f = 0; f < this.settings.fields.length; f++) {
+                wWidgets.field.prototype.update.call(this, this.settings.name, this.settings.fields[f]);
+            }
         },
         save: function () {
         },
@@ -90,11 +93,21 @@
                 fieldContainer.appendTo(form);
             }
 
+            if (this.settings.actions.length > 0) {
+                var actionsContainer = $('<div></div>')
+                    .addClass('wForm-actions');
+
+                for (var a = 0; a < this.settings.actions.length; a++) {
+                    var option = this.settings.actions[a],
+                        template = this.generateActionHTML(option);
+                    $(template).appendTo(actionsContainer)
+                }
+                actionsContainer.appendTo(form);
+            }
             form.appendTo($(this.element));
-
         },
-        generateAction: function () {
-
+        generateActionHTML: function (actionSource) {
+            return '<input type="button" value="' + actionSource.caption +'" name="' + actionSource.name + '">';
         },
         generateField: function (fieldSource) {
             if (fieldSource.type || fieldSource.name) {

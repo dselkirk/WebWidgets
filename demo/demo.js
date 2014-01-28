@@ -41,12 +41,21 @@ $('.js-form-example-container').wForm({
         { name: 'someColorPicker', type: 'picker', caption: "Какой-то цвет:"}
 
     ],
-    actions: {
-        reset: function () {
-            this.clear();
+    actions: [
+        {
+            name: 'save',
+            caption: 'Сохранить'
         },
-        save: function () {
-            this.save();
+        {
+            name: 'reset',
+            caption: 'Очистить'
+        },
+        {
+            name: 'console',
+            action: function () {
+                console.log('hello testing')
+            },
+            caption: 'Консолька'
         }
-    }
+    ]
 });
