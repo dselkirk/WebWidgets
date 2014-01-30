@@ -41,7 +41,17 @@
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
-                    this.render();
+                    // Рендерим HTML-шаблон
+                    this.generateHTML();
+
+                    // Делаем форму красивой
+                    this.prettify();
+
+                    // Инициализируем поля
+                    this.populateFields(this.settings.fields);
+
+                    // Инициализируем кнопки
+                    this.populateActions(this.settings.actions);
                     break;
                 default:
                     console.error(pluginName + ': Неверно указан renderer');
@@ -55,21 +65,24 @@
         },
         save: function () {
         },
+        prettify: function () {
+        },
         render: function () {
             // Рендерим HTML-шаблон
             this.generateHTML();
 
+            // Инициализируем поля
             this.populateFields(this.settings.fields);
+
+            // Инициализируем кнопки
             this.populateActions(this.settings.actions);
         },
         populateFields: function (fields) {
-            // Инициализируем поля
             for (var f = 0; f < fields.length; f++) {
                 wWidgets.field.prototype.populate.call(this, fields[f]);
             }
         },
         populateActions: function (actions) {
-            // Инициализируем кнопки
             for (var a = 0; a < actions.length; a++) {
                 var action = actions[a],
                     defaults = {

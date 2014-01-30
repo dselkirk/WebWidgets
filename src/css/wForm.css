@@ -1,3 +1,15 @@
-.wForm-field {
+.wForm--aligned .wForm-field {
     padding: 10px;
 }
+
+.wForm--aligned .wForm-actions {
+    text-align: center;
+}
+
+.wForm--aligned .wForm-label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    padding-right: 10px;
+}
+
