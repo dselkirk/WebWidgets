@@ -15,6 +15,8 @@
      * @property {string}  defaults.fields.name      - Имя поля. Передается на сервер
      * @property {string}  defaults.fields.type      - Тип поля. Возможны следующие значения:<br/>
      *                                                  text - текстовое поле,<br/>
+     *                                                  password - поле для пароля,<br/>
+     *                                                  email - поле для электронного адреса,<br/>
      *                                                  number - числовое поле,<br />
      *                                                  date - поле даты,<br />
      *                                                  time - поле времени,<br />

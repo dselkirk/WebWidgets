@@ -13,6 +13,15 @@
                 case 'kendoui':
                     switch (settings.type) {
                         case 'text':
+                        case 'email':
+                        case 'password':
+                            var defaults = {
+                                value: null
+                            };
+                            defaults = $.extend(true, defaults, settings);
+                            form
+                                .find('#' + settings.name)
+                                .val(defaults.value)
                             break;
                         case 'number':
                             var defaults = {
@@ -96,6 +105,8 @@
 
             switch (settings.type) {
                 case 'text':
+                case 'password':
+                case 'email':
                     form
                         .find('#' + settings.name)
                         .val(defValue);
@@ -103,7 +114,6 @@
                 case 'number':
                     form
                         .find('#' + settings.name)
-                        .kendoNumericTextBox()
                         .data('kendoNumericTextBox')
                         .value(defValue);
                     break;
@@ -138,7 +148,9 @@
 
             switch (type) {
                 case 'text':
-                    template = '<input class="k-textbox" data-field-type="' + type + '" name="' + id + '" id="' + id + '">';
+                case 'password':
+                case 'email':
+                    template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
                 case 'number':
                 case 'date':

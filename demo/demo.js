@@ -33,7 +33,8 @@ var test = $('.js-form-example-container').wForm({
     name: 'testForm',
     url: '#',
     fields: [
-        { name: 'someName', type: 'text', caption: "Имя:" },
+        { name: 'someName', type: 'text', caption: "Имя:", value: "Необычное имя" },
+        { name: 'somePassword', type: 'password', caption: "Пароль:" },
         { name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300 },
         { name: 'someDate', type: 'date', caption: "Какая-то дата:", value: new Date()},
         { name: 'someTime', type: 'time', caption: "Какое-то время:"},
