@@ -29,17 +29,16 @@ $('.js-grid-example-container').wGrid({
 
 
 // Пример использования wForm
-$('.js-form-example-container').wForm({
+var test = $('.js-form-example-container').wForm({
     name: 'testForm',
     url: '#',
     fields: [
         { name: 'someName', type: 'text', caption: "Имя:" },
-        { name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 200, min: 100, max: 300 },
-        { name: 'someDate', type: 'date', caption: "Какая-то дата:"},
+        { name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300 },
+        { name: 'someDate', type: 'date', caption: "Какая-то дата:", value: new Date()},
         { name: 'someTime', type: 'time', caption: "Какое-то время:"},
         { name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"},
-        { name: 'someColorPicker', type: 'picker', caption: "Какой-то цвет:"}
-
+        { name: 'someColorPicker', type: 'color', caption: "Какой-то цвет:"}
     ],
     actions: [
         {
@@ -48,14 +47,26 @@ $('.js-form-example-container').wForm({
         },
         {
             name: 'reset',
+            icon: 'refresh',
             caption: 'Очистить'
         },
         {
             name: 'console',
-            action: function () {
+            click: function () {
                 console.log('hello testing')
             },
             caption: 'Консолька'
+        },
+        {
+            name: 'disabled',
+            enable: false,
+            caption: 'Отключенная'
         }
     ]
 });
+
+$('#testme').on('click', function () {
+    test
+        .data('wForm')
+        .clear();
+})

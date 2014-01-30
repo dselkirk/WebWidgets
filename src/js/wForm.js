@@ -14,7 +14,12 @@
      * @property {object[]}  defaults.fields         - Массив объектов полей. <br/> Объект поля включает в себя следующие аттрибуты:
      * @property {string}  defaults.fields.name      - Имя поля. Передается на сервер
      * @property {string}  defaults.fields.type      - Тип поля. Возможны следующие значения:<br/>
-     *                                                  text - текстовое поле<br/>
+     *                                                  text - текстовое поле,<br/>
+     *                                                  number - числовое поле,<br />
+     *                                                  date - поле даты,<br />
+     *                                                  time - поле времени,<br />
+     *                                                  datetime - поле даты и времени,<br />
+     *                                                  color - выбор цвета
      *
      * @property {boolean}  defaults.readonly        - wForm только в режиме просмотра.
      * @property {object[]}  defaults.actions        - Действия с wForm
@@ -43,16 +48,35 @@
         },
         clear: function () {
             for (var f = 0; f < this.settings.fields.length; f++) {
-                wWidgets.field.prototype.update.call(this, this.settings.name, this.settings.fields[f]);
+                wWidgets.field.prototype.update.call(this, this.settings.fields[f]);
             }
         },
         save: function () {
         },
         render: function () {
+            // Рендерим HTML-шаблон
             this.generateHTML();
+
+            // Инициализируем поля
             for (var f = 0; f < this.settings.fields.length; f++) {
-                wWidgets.field.prototype.populate.call(this, this.settings.name, this.settings.fields[f]);
+                wWidgets.field.prototype.populate.call(this, this.settings.fields[f]);
             }
+
+            // Инициализируем кнопки
+            for (var a = 0; a < this.settings.actions.length; a++) {
+                var action = this.settings.actions[a],
+                    defaults = {
+                        enable: true,
+                        icon: null,
+                        imageUrl: null,
+                        click: null
+                    };
+                defaults = $.extend(true, defaults, action);
+                $(this.element)
+                    .find('#' + action.name)
+                    .kendoButton(defaults);
+            }
+
         },
         populate: function (formData) {
         },
@@ -107,7 +131,7 @@
             form.appendTo($(this.element));
         },
         generateActionHTML: function (actionSource) {
-            return '<input type="button" value="' + actionSource.caption +'" name="' + actionSource.name + '">';
+            return '<button id="' + actionSource.name + '" type="button">' + actionSource.caption + '</button>';
         },
         generateField: function (fieldSource) {
             if (fieldSource.type || fieldSource.name) {
@@ -125,8 +149,8 @@
     // Some kind of singleton
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName, new wForm(this, options));
+            if (!$.data(this, pluginName)) {
+                $.data(this, pluginName, new wForm(this, options));
             }
         });
     };

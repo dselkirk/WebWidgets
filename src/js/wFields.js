@@ -6,7 +6,9 @@
         };
 
     wField.prototype = {
-        populate: function (form, settings) {
+        populate: function (settings) {
+            var form = $('#' + this.settings.name);
+
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
@@ -22,7 +24,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            $('#' + form)
+                            form
                                 .find('#' + settings.name)
                                 .kendoNumericTextBox(defaults);
                             break;
@@ -35,7 +37,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            $('#' + form)
+                            form
                                 .find('#' + settings.name)
                                 .kendoDatePicker(defaults);
                             break;
@@ -48,7 +50,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            $('#' + form)
+                            form
                                 .find('#' + settings.name)
                                 .kendoTimePicker(defaults);
                             break;
@@ -62,7 +64,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            $('#' + form)
+                            form
                                 .find('#' + settings.name)
                                 .kendoDateTimePicker(defaults);
                             break;
@@ -77,7 +79,7 @@
                                 }
                                 ;
                             defaults = $.extend(true, defaults, settings);
-                            $('#' + form)
+                            form
                                 .find('#' + settings.name)
                                 .kendoColorPicker(defaults);
                             break;
@@ -88,40 +90,43 @@
                     break;
             }
         },
-        update: function (form, settings, value) {
-            var defValue = value != undefined ? value : null;
+        update: function (settings, value) {
+            var defValue = value != undefined ? value : null,
+                form = $('#' + this.settings.name);
 
             switch (settings.type) {
                 case 'text':
-                    $('#' + form)
-                        .find('#' + settings.name).val(defValue);
+                    form
+                        .find('#' + settings.name)
+                        .val(defValue);
                     break;
                 case 'number':
-                    $('#' + form)
+                    form
                         .find('#' + settings.name)
+                        .kendoNumericTextBox()
                         .data('kendoNumericTextBox')
                         .value(defValue);
                     break;
                 case 'date':
-                    $('#' + form)
+                    form
                         .find('#' + settings.name)
                         .data('kendoDatePicker')
                         .value(defValue);
                     break;
                 case 'time':
-                    $('#' + form)
+                    form
                         .find('#' + settings.name)
                         .data('kendoTimePicker')
                         .value(defValue);
                     break;
                 case 'datetime':
-                    $('#' + form)
+                    form
                         .find('#' + settings.name)
                         .data('kendoDateTimePicker')
                         .value(defValue);
                     break;
-                case 'picker':
-                    $('#' + form)
+                case 'color':
+                    form
                         .find('#' + settings.name)
                         .data('kendoColorPicker')
                         .value(defValue);
@@ -133,14 +138,14 @@
 
             switch (type) {
                 case 'text':
-                    template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
+                    template = '<input class="k-textbox" data-field-type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
                 case 'number':
                 case 'date':
                 case 'time':
                 case 'datetime':
-                case 'picker':
-                    template = '<input data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
+                case 'color':
+                    template = '<input data-field-type="' + type + '" name="' + id + '" id="' + id + '">';
                     break;
                 default:
                     console.error(pluginName + ': Неверно указан тип поля');
@@ -154,8 +159,8 @@
 // Some kind of singleton
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName, new wField(this, options));
+            if (!$.data(this, pluginName)) {
+                $.data(this, pluginName, new wField(this, options));
             }
         });
     };
@@ -168,6 +173,5 @@
     }
 
     wWidgets.field = wField;
-})
-    (jQuery, window, document);
+})(jQuery, window, document);
 
