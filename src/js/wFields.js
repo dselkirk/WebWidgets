@@ -7,8 +7,8 @@
 
     wField.prototype = {
         populate: function (settings) {
-            var form = $('#' + this.settings.name);
-
+            var form = $('#' + this.settings.name),
+                element =  form.find('#' + settings.name);
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
@@ -19,9 +19,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            form
-                                .find('#' + settings.name)
-                                .val(defaults.value)
+                            element.val(defaults.value)
                             break;
                         case 'number':
                             var defaults = {
@@ -33,9 +31,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            form
-                                .find('#' + settings.name)
-                                .kendoNumericTextBox(defaults);
+                            element.kendoNumericTextBox(defaults);
                             break;
                         case 'date':
                             var defaults = {
@@ -46,9 +42,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            form
-                                .find('#' + settings.name)
-                                .kendoDatePicker(defaults);
+                            element.kendoDatePicker(defaults);
                             break;
                         case 'time':
                             var defaults = {
@@ -59,9 +53,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            form
-                                .find('#' + settings.name)
-                                .kendoTimePicker(defaults);
+                            element.kendoTimePicker(defaults);
                             break;
                         case 'datetime':
                             var defaults = {
@@ -73,11 +65,9 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            form
-                                .find('#' + settings.name)
-                                .kendoDateTimePicker(defaults);
+                            element.kendoDateTimePicker(defaults);
                             break;
-                        case 'picker':
+                        case 'color':
                             var defaults = {
                                     buttons: true,
                                     messages: {
@@ -88,9 +78,7 @@
                                 }
                                 ;
                             defaults = $.extend(true, defaults, settings);
-                            form
-                                .find('#' + settings.name)
-                                .kendoColorPicker(defaults);
+                            element.kendoColorPicker(defaults);
                             break;
                     }
                     break;
@@ -101,43 +89,37 @@
         },
         update: function (settings, value) {
             var defValue = value != undefined ? value : null,
-                form = $('#' + this.settings.name);
+                form = $('#' + this.settings.name),
+                element =  form.find('#' + settings.name);
 
             switch (settings.type) {
                 case 'text':
                 case 'password':
                 case 'email':
-                    form
-                        .find('#' + settings.name)
-                        .val(defValue);
+                    element.val(defValue);
                     break;
                 case 'number':
-                    form
-                        .find('#' + settings.name)
+                    element
                         .data('kendoNumericTextBox')
                         .value(defValue);
                     break;
                 case 'date':
-                    form
-                        .find('#' + settings.name)
+                    element
                         .data('kendoDatePicker')
                         .value(defValue);
                     break;
                 case 'time':
-                    form
-                        .find('#' + settings.name)
+                    element
                         .data('kendoTimePicker')
                         .value(defValue);
                     break;
                 case 'datetime':
-                    form
-                        .find('#' + settings.name)
+                    element
                         .data('kendoDateTimePicker')
                         .value(defValue);
                     break;
                 case 'color':
-                    form
-                        .find('#' + settings.name)
+                    element
                         .data('kendoColorPicker')
                         .value(defValue);
                     break;

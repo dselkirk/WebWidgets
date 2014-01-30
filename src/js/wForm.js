@@ -59,14 +59,19 @@
             // Рендерим HTML-шаблон
             this.generateHTML();
 
+            this.populateFields(this.settings.fields);
+            this.populateActions(this.settings.actions);
+        },
+        populateFields: function (fields) {
             // Инициализируем поля
-            for (var f = 0; f < this.settings.fields.length; f++) {
-                wWidgets.field.prototype.populate.call(this, this.settings.fields[f]);
+            for (var f = 0; f < fields.length; f++) {
+                wWidgets.field.prototype.populate.call(this, fields[f]);
             }
-
+        },
+        populateActions: function (actions) {
             // Инициализируем кнопки
-            for (var a = 0; a < this.settings.actions.length; a++) {
-                var action = this.settings.actions[a],
+            for (var a = 0; a < actions.length; a++) {
+                var action = actions[a],
                     defaults = {
                         enable: true,
                         icon: null,
@@ -78,9 +83,6 @@
                     .find('#' + action.name)
                     .kendoButton(defaults);
             }
-
-        },
-        populate: function (formData) {
         },
         validate: function () {
         },
@@ -130,6 +132,7 @@
                 }
                 actionsContainer.appendTo(form);
             }
+
             form.appendTo($(this.element));
         },
         generateActionHTML: function (actionSource) {

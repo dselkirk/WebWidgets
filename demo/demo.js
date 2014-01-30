@@ -70,4 +70,4 @@ $('#testme').on('click', function () {
     test
         .data('wForm')
         .clear();
-})
+});
