@@ -47,7 +47,6 @@
      * @property {object[]}  defaults.dataSource          - Массив объектов данных. <br/> Объект данных включают в себя пары 'ключ-значение', где ключами являются идентификаторы колонок.
      * @property {boolean}  defaults.sortable             - Разрешена ли сортировка всех колонок.
      * @property {boolean}  defaults.groupable            - Разрешена ли группировка по колонкам.
-     * @property {string}  defaults.groupableMessage      - Сообщение, выводимое в пустой панели группировки колонок.
      * @property {boolean}  defaults.resizable            - Разрешено ли изменение размера колонок.
 
      */
