@@ -42,15 +42,21 @@ var test = $('.js-form-example-container').wForm({
     ],
     actions: [
         {
+            id: 'saveAction',
             name: 'save',
             caption: 'Сохранить'
         },
         {
+            id: 'resetAction',
             name: 'reset',
             icon: 'refresh',
-            caption: 'Очистить'
+            caption: 'Очистить',
+            click: function () {
+                this.clear();
+            }
         },
         {
+            id: 'consoleAction',
             name: 'console',
             click: function () {
                 console.log('hello testing')
@@ -58,15 +64,10 @@ var test = $('.js-form-example-container').wForm({
             caption: 'Консолька'
         },
         {
+            id: 'noAction',
             name: 'disabled',
             enable: false,
             caption: 'Отключенная'
         }
     ]
-});
-
-$('#testme').on('click', function () {
-    test
-        .data('wForm')
-        .clear();
 });

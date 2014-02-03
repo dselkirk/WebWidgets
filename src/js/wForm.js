@@ -38,6 +38,7 @@
         };
 
     wForm.prototype = {
+        settings: {},
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
@@ -59,11 +60,13 @@
             }
         },
         clear: function () {
+            console.log(wForm.element);
             for (var f = 0; f < this.settings.fields.length; f++) {
                 wWidgets.field.prototype.update.call(this, this.settings.fields[f]);
             }
         },
         save: function () {
+            console.log('item saved');
         },
         prettify: function () {
         },
@@ -73,6 +76,8 @@
             }
         },
         populateActions: function (actions) {
+            var self = this;
+
             for (var a = 0; a < actions.length; a++) {
                 var action = actions[a],
                     defaults = {
@@ -82,6 +87,10 @@
                         click: null
                     };
                 defaults = $.extend(true, defaults, action);
+                if (defaults.click == null) {
+                    defaults.click = self.attachActionEvent(defaults);
+                }
+
                 $(this.element)
                     .find('#' + action.name)
                     .kendoButton(defaults);
@@ -141,11 +150,28 @@
             return '<button id="' + actionSource.name + '" type="button">' + actionSource.caption + '</button>';
         },
         generateField: function (fieldSource) {
-            if (fieldSource.type || fieldSource.name|| fieldSource.id) {
+            if (fieldSource.type || fieldSource.name || fieldSource.id) {
                 return wWidgets.field.prototype.generate.call(this, fieldSource.type, fieldSource.id, fieldSource.name);
             } else {
                 console.error(pluginName + ': Не хватает данных для генерации поля');
             }
+        },
+        attachActionEvent: function (source) {
+            var event = null;
+
+            switch (source.name) {
+                case 'save':
+                    event = function () {
+                        wForm.prototype.save();
+                    }
+                    break;
+                case 'reset':
+                    event = function () {
+                        wForm.prototype.clear();
+                    }
+                    break;
+            }
+            return event;
         },
         readonly: function () {
         },
@@ -164,7 +190,7 @@
 
     function wForm(element, options) {
         this.element = element;
-        this.settings = $.extend({}, defaults, options);
+        this.settings = wForm.prototype.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
