@@ -24,7 +24,6 @@
             }
          ],
         groupable: true,
-        groupableMessage: 'Переместите сюда колонки для группировки'
         dataSource: [
             {
                 id: '1', firstName: 'Mike'
