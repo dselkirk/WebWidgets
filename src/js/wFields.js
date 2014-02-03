@@ -18,7 +18,7 @@
                             var defaults = {
                                 value: null
                             };
-                            defaults = $.extend(true, defaults, settings);
+                            defaults = mergeExistingProperties(defaults, settings);
                             element.val(defaults.value);
                             break;
                         case 'number':
@@ -30,7 +30,7 @@
                                 step: 1,
                                 value: null
                             };
-                            defaults = $.extend(true, defaults, settings);
+                            defaults = mergeExistingProperties(defaults, settings);
                             element.kendoNumericTextBox(defaults);
                             break;
                         case 'date':
@@ -41,7 +41,10 @@
                                 start: 'month',
                                 value: null
                             };
-                            defaults = $.extend(true, defaults, settings);
+                            defaults = mergeExistingProperties(defaults, settings);
+                            if (settings.value) {
+                                defaults.value = new Date(settings.value);
+                            }
                             element.kendoDatePicker(defaults);
                             break;
                         case 'time':
@@ -52,7 +55,10 @@
                                 max: new Date(2099, 0, 1, 22, 0, 0),
                                 value: null
                             };
-                            defaults = $.extend(true, defaults, settings);
+                            defaults = mergeExistingProperties(defaults, settings);
+                            if (settings.value) {
+                                defaults.value = new Date(settings.value);
+                            }
                             element.kendoTimePicker(defaults);
                             break;
                         case 'datetime':
@@ -64,7 +70,10 @@
                                 max: new Date(2099, 0, 1, 22, 0, 0),
                                 value: null
                             };
-                            defaults = $.extend(true, defaults, settings);
+                            defaults = mergeExistingProperties(defaults, settings);
+                            if (settings.value) {
+                                defaults.value = new Date(settings.value);
+                            }
                             element.kendoDateTimePicker(defaults);
                             break;
                         case 'color':
@@ -77,7 +86,7 @@
                                     value: null
                                 }
                                 ;
-                            defaults = $.extend(true, defaults, settings);
+                            defaults = mergeExistingProperties(defaults, settings);
                             element.kendoColorPicker(defaults);
                             break;
                     }
