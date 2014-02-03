@@ -32,13 +32,13 @@ var test = $('.js-form-example-container').wForm({
     name: 'testForm',
     url: '#',
     fields: [
-        { name: 'someName', type: 'text', caption: "Имя:", value: "Необычное имя" },
-        { name: 'somePassword', type: 'password', caption: "Пароль:" },
-        { name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300 },
-        { name: 'someDate', type: 'date', caption: "Какая-то дата:", value: new Date()},
-        { name: 'someTime', type: 'time', caption: "Какое-то время:"},
-        { name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"},
-        { name: 'someColorPicker', type: 'color', caption: "Какой-то цвет:"}
+        { id: 'someNameId', name: 'someName', type: 'text', caption: "Имя:", value: "Необычное имя" },
+        { id: 'somePasswordId', name: 'somePassword', type: 'password', caption: "Пароль:" },
+        { id: 'someAgeId', name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300 },
+        { id: 'someDateId', name: 'someDate', type: 'date', caption: "Какая-то дата:", value: new Date()},
+        { id: 'someTimeId', name: 'someTime', type: 'time', caption: "Какое-то время:"},
+        { id: 'someDateTimeId', name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"},
+        { id: 'someColorPickerId', name: 'someColorPicker', type: 'color', caption: "Какой-то цвет:"}
     ],
     actions: [
         {

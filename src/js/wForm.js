@@ -67,16 +67,6 @@
         },
         prettify: function () {
         },
-        render: function () {
-            // Рендерим HTML-шаблон
-            this.generateHTML();
-
-            // Инициализируем поля
-            this.populateFields(this.settings.fields);
-
-            // Инициализируем кнопки
-            this.populateActions(this.settings.actions);
-        },
         populateFields: function (fields) {
             for (var f = 0; f < fields.length; f++) {
                 wWidgets.field.prototype.populate.call(this, fields[f]);
@@ -118,7 +108,6 @@
 
                 // HTML-поле
                 field = this.generateField(fieldSource);
-
                 // Контейнер для label и поля
                 fieldContainer = $('<div></div>').addClass('wForm-field');
 
@@ -152,8 +141,8 @@
             return '<button id="' + actionSource.name + '" type="button">' + actionSource.caption + '</button>';
         },
         generateField: function (fieldSource) {
-            if (fieldSource.type || fieldSource.name) {
-                return wWidgets.field.prototype.generate.call(this, fieldSource.type, fieldSource.name);
+            if (fieldSource.type || fieldSource.name|| fieldSource.id) {
+                return wWidgets.field.prototype.generate.call(this, fieldSource.type, fieldSource.id, fieldSource.name);
             } else {
                 console.error(pluginName + ': Не хватает данных для генерации поля');
             }

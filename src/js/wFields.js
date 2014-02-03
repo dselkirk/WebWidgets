@@ -8,7 +8,7 @@
     wField.prototype = {
         populate: function (settings) {
             var form = $('#' + this.settings.name),
-                element =  form.find('#' + settings.name);
+                element =  form.find('#' + settings.id);
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
@@ -19,7 +19,7 @@
                                 value: null
                             };
                             defaults = $.extend(true, defaults, settings);
-                            element.val(defaults.value)
+                            element.val(defaults.value);
                             break;
                         case 'number':
                             var defaults = {
@@ -90,7 +90,7 @@
         update: function (settings, value) {
             var defValue = value != undefined ? value : null,
                 form = $('#' + this.settings.name),
-                element =  form.find('#' + settings.name);
+                element =  form.find('#' + settings.id);
 
             switch (settings.type) {
                 case 'text':
@@ -125,21 +125,21 @@
                     break;
             }
         },
-        generate: function (type, id) {
+        generate: function (type, id, name) {
             var template = null;
 
             switch (type) {
                 case 'text':
                 case 'password':
                 case 'email':
-                    template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + id + '" id="' + id + '">';
+                    template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + name + '" id="' + id + '">';
                     break;
                 case 'number':
                 case 'date':
                 case 'time':
                 case 'datetime':
                 case 'color':
-                    template = '<input data-field-type="' + type + '" name="' + id + '" id="' + id + '">';
+                    template = '<input data-field-type="' + type + '" type="' + type + '" name="' + name + '" id="' + id + '">';
                     break;
                 default:
                     console.error(pluginName + ': Неверно указан тип поля');
