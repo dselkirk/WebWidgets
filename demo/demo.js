@@ -32,9 +32,31 @@ var test = $('.js-form-example-container').wForm({
     name: 'testForm',
     url: '#',
     fields: [
-        { id: 'someNameId', name: 'someName', type: 'text', caption: "Имя:", value: "Необычное имя" },
+        {
+            id: 'someNameId',
+            name: 'someName',
+            type: 'text',
+            caption: "Имя:",
+            value: "Необычное имя",
+            events: [
+                {
+                    name: 'keyup',
+                    action: function () {
+                        console.log('keyup pressed');
+                    }
+
+                }
+            ]},
         { id: 'somePasswordId', name: 'somePassword', type: 'password', caption: "Пароль:" },
-        { id: 'someAgeId', name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300 },
+        { id: 'someAgeId', name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300, events: [
+            {
+                name: 'spin',
+                action: function () {
+                    console.log('spin');
+                }
+
+            }
+        ] },
         { id: 'someDateId', name: 'someDate', type: 'date', caption: "Какая-то дата:", value: new Date()},
         { id: 'someTimeId', name: 'someTime', type: 'time', caption: "Какое-то время:"},
         { id: 'someDateTimeId', name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"},

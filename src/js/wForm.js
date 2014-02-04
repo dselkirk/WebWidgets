@@ -72,6 +72,7 @@
         populateFields: function (fields) {
             for (var f = 0; f < fields.length; f++) {
                 wWidgets.field.prototype.populate.call(this, fields[f]);
+                wWidgets.field.prototype.attachEvents.call(this, fields[f]);
             }
         },
         populateActions: function (actions) {

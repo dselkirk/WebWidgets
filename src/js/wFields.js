@@ -1,14 +1,22 @@
 ;
 (function ($, window, document, undefined) {
-    var pluginName = "wField",
+    var pluginName = 'wField',
         defaults = {
-            renderer: "kendoui"
+            renderer: 'kendoui'
+        },
+        kendoMapping = {
+            number: 'kendoNumericTextBox',
+            date: 'kendoDatePicker',
+            time: 'kendoTimePicker',
+            datetime: 'kendoDateTimePicker',
+            color: 'kendoColorPicker'
         };
 
     wField.prototype = {
         populate: function (settings) {
             var form = $('#' + this.settings.name),
-                element =  form.find('#' + settings.id);
+                element = form.find('#' + settings.id);
+
             switch (this.settings.renderer) {
                 case 'kendoui':
                     switch (settings.type) {
@@ -78,14 +86,13 @@
                             break;
                         case 'color':
                             var defaults = {
-                                    buttons: true,
-                                    messages: {
-                                        apply: "Обновить",
-                                        cancel: "Отменить"
-                                    },
-                                    value: null
-                                }
-                                ;
+                                buttons: true,
+                                messages: {
+                                    apply: "Обновить",
+                                    cancel: "Отменить"
+                                },
+                                value: null
+                            };
                             defaults = mergeExistingProperties(defaults, settings);
                             element.kendoColorPicker(defaults);
                             break;
@@ -96,10 +103,43 @@
                     break;
             }
         },
+        attachEvents: function (field) {
+            var form = $('#' + this.settings.name),
+                element = form.find('#' + field.id);
+
+            if (field.events) {
+                for (var e = 0; e < field.events.length; e++) {
+                    var event = field.events[e];
+                    switch (field.type) {
+                        case 'text':
+                        case 'password':
+                        case 'email':
+                            element.on(event.name, function () {
+                                event.action.call(this);
+                            })
+                            break;
+                        case 'number':
+                        case 'date':
+                        case 'time':
+                        case 'datetime':
+                        case 'color':
+                            element
+                                .data(kendoMapping[field.type])
+                                .bind(event.name, function () {
+                                    event.action.call(this);
+                                })
+                            break;
+                        default:
+                            console.error(pluginName + ': Неверно указан тип поля');
+                            break;
+                    }
+                }
+            }
+        },
         update: function (settings, value) {
             var defValue = value != undefined ? value : null,
                 form = $('#' + this.settings.name),
-                element =  form.find('#' + settings.id);
+                element = form.find('#' + settings.id);
 
             switch (settings.type) {
                 case 'text':
@@ -108,28 +148,12 @@
                     element.val(defValue);
                     break;
                 case 'number':
-                    element
-                        .data('kendoNumericTextBox')
-                        .value(defValue);
-                    break;
                 case 'date':
-                    element
-                        .data('kendoDatePicker')
-                        .value(defValue);
-                    break;
                 case 'time':
-                    element
-                        .data('kendoTimePicker')
-                        .value(defValue);
-                    break;
                 case 'datetime':
-                    element
-                        .data('kendoDateTimePicker')
-                        .value(defValue);
-                    break;
                 case 'color':
                     element
-                        .data('kendoColorPicker')
+                        .data(kendoMapping[settings.type])
                         .value(defValue);
                     break;
             }
