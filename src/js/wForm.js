@@ -34,7 +34,10 @@
             fields: [],
             actions: [],
             readonly: false,
-            type: 'aligned'
+            type: 'aligned',
+            onSubmit: null,
+            onReset: null,
+            onValidate: null
         };
 
     wForm.prototype = {
@@ -63,9 +66,17 @@
             for (var f = 0; f < this.settings.fields.length; f++) {
                 wWidgets.field.prototype.update.call(this, this.settings.fields[f]);
             }
+
+            if (this.settings.onReset) {
+                this.settings.onReset.call(this);
+            }
         },
         save: function () {
             console.log('item saved');
+
+            if (this.settings.onSubmit) {
+                this.settings.onSubmit.call(this);
+            }
         },
         prettify: function () {
         },

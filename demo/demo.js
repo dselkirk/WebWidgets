@@ -91,5 +91,8 @@ var test = $('.js-form-example-container').wForm({
             enable: false,
             caption: 'Отключенная'
         }
-    ]
+    ],
+    onSubmit: function() {
+        console.log('form saved!');
+    }
 });
