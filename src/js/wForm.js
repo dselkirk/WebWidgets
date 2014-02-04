@@ -108,17 +108,15 @@
                     .data("kendoButton");
 
                 if (action.click != null) {
-                    (function(action) {
+                    (function (action) {
                         button.bind("click", function () {
-                        action.click.call(wForm.prototype);
-                    });
+                            action.click.call(wForm.prototype);
+                        });
                     }(action));
                 }
             }
         },
         validate: function () {
-        },
-        validateField: function () {
         },
         generateHTML: function () {
             var field,
@@ -137,6 +135,7 @@
 
                 // HTML-поле
                 field = this.generateField(fieldSource);
+
                 // Контейнер для label и поля
                 fieldContainer = $('<div></div>').addClass('wForm-field');
 
@@ -171,7 +170,7 @@
         },
         generateField: function (fieldSource) {
             if (fieldSource.type || fieldSource.name || fieldSource.id) {
-                return wWidgets.field.prototype.generate.call(this, fieldSource.type, fieldSource.id, fieldSource.name);
+                return wWidgets.field.prototype.generate.call(this, fieldSource);
             } else {
                 console.error(pluginName + ': Не хватает данных для генерации поля');
             }
@@ -199,8 +198,6 @@
             return event;
         },
         readonly: function () {
-        },
-        readonlyField: function (fieldId) {
         }
     };
 

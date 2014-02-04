@@ -3,13 +3,13 @@ $('.js-grid-example-container').wGrid({
     renderer: 'kendoui',
     columns: [
         {
-            field: "id",
-            title: "ID",
+            field: 'id',
+            title: 'ID',
             sortable: true
         },
         {
-            field: "firstName",
-            title: "First Name",
+            field: 'firstName',
+            title: 'First Name',
             sortable: false
         }
     ],
@@ -36,8 +36,8 @@ var test = $('.js-form-example-container').wForm({
             id: 'someNameId',
             name: 'someName',
             type: 'text',
-            caption: "Имя:",
-            value: "Необычное имя",
+            caption: 'Имя:',
+            value: 'Необычное имя',
             events: [
                 {
                     name: 'keyup',
@@ -47,8 +47,8 @@ var test = $('.js-form-example-container').wForm({
 
                 }
             ]},
-        { id: 'somePasswordId', name: 'somePassword', type: 'password', caption: "Пароль:" },
-        { id: 'someAgeId', name: 'someAge', type: 'number', caption: "Циферка возраста:", value: 204, min: 100, max: 300, events: [
+        { id: 'somePasswordId', name: 'somePassword', type: 'password', caption: 'Пароль:', placeholder: 'Введите пароль' },
+        { id: 'someAgeId', name: 'someAge', type: 'number', caption: 'Циферка возраста:', value: 204, min: 100, max: 300, events: [
             {
                 name: 'spin',
                 action: function () {
@@ -57,10 +57,10 @@ var test = $('.js-form-example-container').wForm({
 
             }
         ] },
-        { id: 'someDateId', name: 'someDate', type: 'date', caption: "Какая-то дата:", value: new Date()},
-        { id: 'someTimeId', name: 'someTime', type: 'time', caption: "Какое-то время:"},
-        { id: 'someDateTimeId', name: 'someDateTime', type: 'datetime', caption: "Какая-то дата и время:"},
-        { id: 'someColorPickerId', name: 'someColorPicker', type: 'color', caption: "Какой-то цвет:"}
+        { id: 'someDateId', name: 'someDate', type: 'date', caption: 'Какая-то дата:', value: new Date()},
+        { id: 'someTimeId', name: 'someTime', type: 'time', caption: 'Какое-то время:', placeholder: 'Введите время'},
+        { id: 'someDateTimeId', name: 'someDateTime', type: 'datetime', caption: 'Какая-то дата и время:'},
+        { id: 'someColorPickerId', name: 'someColorPicker', type: 'color', caption: 'Какой-то цвет:'}
     ],
     actions: [
         {

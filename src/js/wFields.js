@@ -158,21 +158,21 @@
                     break;
             }
         },
-        generate: function (type, id, name) {
+        generate: function (fieldSource) {
             var template = null;
 
-            switch (type) {
+            switch (fieldSource.type) {
                 case 'text':
                 case 'password':
                 case 'email':
-                    template = '<input class="k-textbox" data-field-type="' + type + '" type="' + type + '" name="' + name + '" id="' + id + '">';
+                    template = '<input class="k-textbox" data-field-type="' + fieldSource.type + '" type="' + fieldSource.type + '" name="' + fieldSource.name + '" id="' + fieldSource.id + '">';
                     break;
                 case 'number':
                 case 'date':
                 case 'time':
                 case 'datetime':
                 case 'color':
-                    template = '<input data-field-type="' + type + '" type="' + type + '" name="' + name + '" id="' + id + '">';
+                    template = '<input data-field-type="' + fieldSource.type + '" type="' + fieldSource.type + '" name="' + fieldSource.name + '" id="' + fieldSource.id + '">';
                     break;
                 default:
                     console.error(pluginName + ': Неверно указан тип поля');
