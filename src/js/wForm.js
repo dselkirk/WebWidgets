@@ -60,7 +60,6 @@
             }
         },
         clear: function () {
-            console.log(wForm.element);
             for (var f = 0; f < this.settings.fields.length; f++) {
                 wWidgets.field.prototype.update.call(this, this.settings.fields[f]);
             }
@@ -83,17 +82,26 @@
                     defaults = {
                         enable: true,
                         icon: null,
-                        imageUrl: null,
-                        click: null
+                        imageUrl: null
                     };
-                defaults = $.extend(true, defaults, action);
-                if (defaults.click == null) {
-                    defaults.click = self.attachActionEvent(defaults);
+                defaults = mergeExistingProperties(defaults, action);
+
+                if (action.click == null) {
+                    defaults.click = self.attachActionEvent(action);
                 }
 
-                $(this.element)
+                var button = $(this.element)
                     .find('#' + action.name)
-                    .kendoButton(defaults);
+                    .kendoButton(defaults)
+                    .data("kendoButton");
+
+                if (action.click != null) {
+                    (function(action) {
+                        button.bind("click", function () {
+                        action.click.call(wForm.prototype);
+                    });
+                    }(action));
+                }
             }
         },
         validate: function () {
@@ -168,6 +176,11 @@
                 case 'reset':
                     event = function () {
                         wForm.prototype.clear();
+                    }
+                    break;
+                default:
+                    event = function () {
+                        console.error(pluginName + ': Для кнопки с таким именем событие не реализовано. Реализуйте сами');
                     }
                     break;
             }
