@@ -191,7 +191,7 @@
                     break;
                 default:
                     event = function () {
-                        console.error(pluginName + ': Для кнопки с таким именем событие не реализовано. Реализуйте сами');
+                        console.error(pluginName + ': Для кнопки с таким именем событие не реализовано');
                     }
                     break;
             }
