@@ -6,6 +6,16 @@
 (function ($, window, document, undefined) {
 
     /**
+     * Что необходимо доделать:
+     * 1) Кастомная валидация с помощью pattern и rules
+     * 2) Стилизация валидации
+     * 3) Режим просмотра
+     * 4) Culture для российских данных
+     * 5) Record - заполнение формы
+     * 6) Поля типа выпадающего списка, всплывающего списка, radiobuttons, checkboxes
+     *
+     *
+     *
      * @namespace wForm
      * @property {object}  defaults                  - Настройки для wForm.
      * @property {string}  defaults.renderer         - Движок рендеринга. Возможные значения: <br/>'kendoui' - за рендеринг отвечает библиотека Kendo UI, необходимо подключить саму библиотеку и стили.
@@ -23,7 +33,6 @@
      *                                                  datetime - поле даты и времени,<br />
      *                                                  color - выбор цвета
      *
-     * @property {boolean}  defaults.readonly        - wForm только в режиме просмотра.
      * @property {object[]}  defaults.actions        - Действия с wForm
      */
     var pluginName = 'wForm',
@@ -33,8 +42,8 @@
             url: '#',
             fields: [],
             actions: [],
-            readonly: false,
             type: 'aligned',
+            validate: true,
             onSubmit: null,
             onReset: null,
             onValidate: null
@@ -42,6 +51,7 @@
 
     wForm.prototype = {
         settings: {},
+        validator: null,
         init: function () {
             switch (this.settings.renderer) {
                 case 'kendoui':
@@ -53,6 +63,11 @@
 
                     // Инициализируем поля
                     this.populateFields(this.settings.fields);
+
+                    // Включаем валидацию
+                    if (this.settings.validate) {
+                        this.initValidataion();
+                    }
 
                     // Инициализируем кнопки
                     this.populateActions(this.settings.actions);
@@ -72,10 +87,12 @@
             }
         },
         save: function () {
-            console.log('item saved');
-
-            if (this.settings.onSubmit) {
-                this.settings.onSubmit.call(this);
+            if (this.settings.validate && this.validator.validate()) {
+                if (this.settings.onSubmit) {
+                    this.settings.onSubmit.call(this);
+                }
+            } else {
+                console.error('Форма не прошла валидацию');
             }
         },
         prettify: function () {
@@ -116,7 +133,15 @@
                 }
             }
         },
-        validate: function () {
+        initValidataion: function () {
+            wForm.prototype.validator = $('#' + this.settings.name)
+                .kendoValidator({
+                    messages: {
+                        required: "Обязательное поле",
+                        email: "Неверный формат email"
+                    }
+                })
+                .data('kendoValidator');
         },
         generateHTML: function () {
             var field,
@@ -196,8 +221,6 @@
                     break;
             }
             return event;
-        },
-        readonly: function () {
         }
     };
 

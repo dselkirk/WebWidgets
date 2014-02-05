@@ -46,8 +46,12 @@ var test = $('.js-form-example-container').wForm({
                     }
 
                 }
-            ]},
-        { id: 'somePasswordId', name: 'somePassword', type: 'password', caption: 'Пароль:', placeholder: 'Введите пароль' },
+            ],
+            required: true
+        }
+        ,
+        { id: 'somePasswordId', name: 'somePassword', type: 'password', caption: 'Пароль:', placeholder: 'Введите пароль', required: true },
+        { id: 'someEmailId', name: 'someEmail', type: 'email', caption: 'Email:', placeholder: 'Введите email' },
         { id: 'someAgeId', name: 'someAge', type: 'number', caption: 'Циферка возраста:', value: 204, min: 100, max: 300, events: [
             {
                 name: 'spin',
