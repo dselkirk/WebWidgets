@@ -24,9 +24,11 @@
                         case 'email':
                         case 'password':
                             var defaults = {
-                                value: null
+                                value: null,
+                                placeholder: ''
                             };
                             defaults = mergeExistingProperties(defaults, settings);
+                            element.attr('placeholder', defaults.placeholder);
                             element.val(defaults.value);
                             break;
                         case 'number':
@@ -36,9 +38,11 @@
                                 min: null,
                                 max: null,
                                 step: 1,
-                                value: null
+                                value: null,
+                                placeholder: ''
                             };
                             defaults = mergeExistingProperties(defaults, settings);
+                            element.attr('placeholder', defaults.placeholder);
                             element.kendoNumericTextBox(defaults);
                             break;
                         case 'date':
@@ -47,12 +51,14 @@
                                 min: new Date(1900, 0, 1),
                                 max: new Date(2099, 11, 31),
                                 start: 'month',
-                                value: null
+                                value: null,
+                                placeholder: ''
                             };
                             defaults = mergeExistingProperties(defaults, settings);
                             if (settings.value) {
                                 defaults.value = new Date(settings.value);
                             }
+                            element.attr('placeholder', defaults.placeholder);
                             element.kendoDatePicker(defaults);
                             break;
                         case 'time':
@@ -61,12 +67,14 @@
                                 interval: '30',
                                 min: new Date(1900, 0, 1, 8, 0, 0),
                                 max: new Date(2099, 0, 1, 22, 0, 0),
-                                value: null
+                                value: null,
+                                placeholder: ''
                             };
                             defaults = mergeExistingProperties(defaults, settings);
                             if (settings.value) {
                                 defaults.value = new Date(settings.value);
                             }
+                            element.attr('placeholder', defaults.placeholder);
                             element.kendoTimePicker(defaults);
                             break;
                         case 'datetime':
@@ -76,12 +84,14 @@
                                 interval: '30',
                                 min: new Date(1900, 0, 1, 8, 0, 0),
                                 max: new Date(2099, 0, 1, 22, 0, 0),
-                                value: null
+                                value: null,
+                                placeholder: ''
                             };
                             defaults = mergeExistingProperties(defaults, settings);
                             if (settings.value) {
                                 defaults.value = new Date(settings.value);
                             }
+                            element.attr('placeholder', defaults.placeholder);
                             element.kendoDateTimePicker(defaults);
                             break;
                         case 'color':
@@ -91,9 +101,11 @@
                                     apply: "Обновить",
                                     cancel: "Отменить"
                                 },
-                                value: null
+                                value: null,
+                                placeholder: ''
                             };
                             defaults = mergeExistingProperties(defaults, settings);
+                            element.attr('placeholder', defaults.placeholder);
                             element.kendoColorPicker(defaults);
                             break;
                     }
